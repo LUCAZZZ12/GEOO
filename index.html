@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Roboto:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -15,7 +16,7 @@
     <header class="navbar" id="navbar">
         <div class="container nav-content">
             <div class="logo-small">
-                <img src="assets/img/logo-nav.png" alt="IngGEOtop Logo">
+                <img src="assets/img/logo-nav.png" alt="IngGeoTop Logo">
             </div>
             <nav>
                 <ul class="nav-links">
@@ -63,7 +64,7 @@
             </div>
             <div class="service-text fade-in">
                 <div class="text-content">
-                    <span class="service-tag">PL · 01</span>
+                    <span class="service-tag">01</span>
                     <h3>ELABORACIÓN DE PLANOS</h3>
                     <div class="divider"></div>
                     <ul>
@@ -83,7 +84,7 @@
             </div>
             <div class="service-text fade-in">
                 <div class="text-content">
-                    <span class="service-tag">TOP · 02</span>
+                    <span class="service-tag">02</span>
                     <h3>LEVANTAMIENTOS TOPOGRÁFICOS</h3>
                     <div class="divider"></div>
                     <ul>
@@ -102,7 +103,7 @@
             </div>
             <div class="service-text fade-in">
                 <div class="text-content">
-                    <span class="service-tag">RPL · 03</span>
+                    <span class="service-tag">03</span>
                     <h3>REPLANTEOS Y DELIMITACIÓN DE LINDEROS</h3>
                     <div class="divider"></div>
                     <ul>
@@ -120,7 +121,7 @@
             </div>
             <div class="service-text fade-in">
                 <div class="text-content">
-                    <span class="service-tag">GEO · 04</span>
+                    <span class="service-tag">04</span>
                     <h3>ESTUDIOS DE SUELO</h3>
                     <div class="divider"></div>
                     <ul>
@@ -135,34 +136,131 @@
         </div>
     </section>
 
-    <section class="features">
-        <div class="container features-flex fade-in">
-            <div class="feature-item">
-                <div class="feat-icon-badge"><span class="feat-icon">🎯</span></div>
-                <div>
-                    <h4>PRECISIÓN</h4>
-                    <p>en cada medición</p>
-                </div>
+    <section class="why-us">
+        <div class="container text-center fade-in">
+            <div class="eyebrow eyebrow-center">
+                <svg class="contour-mark" viewBox="0 0 48 32" width="34" height="23" aria-hidden="true">
+                    <path d="M2 26C10 14 14 30 22 18S34 6 46 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    <path d="M2 18C10 8 14 22 22 12S34 2 46 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                </svg>
+                <span>NUESTROS DIFERENCIALES</span>
             </div>
-            <div class="feature-item">
-                <div class="feat-icon-badge"><span class="feat-icon">💻</span></div>
-                <div>
-                    <h4>TECNOLOGÍA</h4>
-                    <p>de última generación</p>
+            <h2 class="section-title section-title-light mx-auto">¿POR QUÉ <span>ELEGIRNOS?</span></h2>
+            <p class="about-text mx-auto why-lead">Toca o pasa el cursor sobre cada punto para conocer más.</p>
+        </div>
+
+        <div class="container why-grid fade-in">
+            <button class="why-card" type="button" aria-expanded="false">
+                <div class="why-card-top">
+                    <div class="feat-icon-badge"><span class="feat-icon">🎯</span></div>
+                    <div class="why-card-heading">
+                        <h4>PRECISIÓN</h4>
+                        <p>en cada medición</p>
+                    </div>
+                    <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
-            </div>
-            <div class="feature-item">
-                <div class="feat-icon-badge"><span class="feat-icon">👥</span></div>
-                <div>
-                    <h4>PROFESIONALES</h4>
-                    <p>altamente capacitados</p>
+                <div class="why-card-detail">
+                    <div class="why-card-detail-inner">
+                        <p>Equipos GPS/GNSS y estación total de alta gama que garantizan tolerancias milimétricas en cada punto levantado.</p>
+                    </div>
                 </div>
+            </button>
+
+            <button class="why-card" type="button" aria-expanded="false">
+                <div class="why-card-top">
+                    <div class="feat-icon-badge"><span class="feat-icon">💻</span></div>
+                    <div class="why-card-heading">
+                        <h4>TECNOLOGÍA</h4>
+                        <p>de última generación</p>
+                    </div>
+                    <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="why-card-detail">
+                    <div class="why-card-detail-inner">
+                        <p>Drones para fotogrametría, receptores RTK y software de procesamiento CAD/BIM que agilizan cada etapa, del campo al plano final.</p>
+                    </div>
+                </div>
+            </button>
+
+            <button class="why-card" type="button" aria-expanded="false">
+                <div class="why-card-top">
+                    <div class="feat-icon-badge"><span class="feat-icon">👥</span></div>
+                    <div class="why-card-heading">
+                        <h4>PROFESIONALES</h4>
+                        <p>altamente capacitados</p>
+                    </div>
+                    <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="why-card-detail">
+                    <div class="why-card-detail-inner">
+                        <p>Ingenieros geógrafos, civiles y técnicos topógrafos con experiencia de campo y respaldo colegiado.</p>
+                    </div>
+                </div>
+            </button>
+
+            <button class="why-card" type="button" aria-expanded="false">
+                <div class="why-card-top">
+                    <div class="feat-icon-badge"><span class="feat-icon">✔️</span></div>
+                    <div class="why-card-heading">
+                        <h4>COMPROMISO</h4>
+                        <p>con la calidad y el plazo</p>
+                    </div>
+                    <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+                <div class="why-card-detail">
+                    <div class="why-card-detail-inner">
+                        <p>Cronogramas claros, seguimiento constante y entregables con respaldo técnico y legal.</p>
+                    </div>
+                </div>
+            </button>
+        </div>
+    </section>
+
+    <section class="coverage section-padding bg-light">
+        <div class="container">
+            <div class="eyebrow">
+                <svg class="contour-mark" viewBox="0 0 48 32" width="34" height="23" aria-hidden="true">
+                    <path d="M2 26C10 14 14 30 22 18S34 6 46 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+                    <path d="M2 18C10 8 14 22 22 12S34 2 46 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.5"/>
+                </svg>
+                <span>ZONA DE TRABAJO</span>
             </div>
-            <div class="feature-item">
-                <div class="feat-icon-badge"><span class="feat-icon">✔️</span></div>
-                <div>
-                    <h4>COMPROMISO</h4>
-                    <p>con la calidad y el plazo</p>
+            <h2 class="section-title text-center mx-auto">COBERTURA <span>PROVINCIAL</span></h2>
+            <p class="about-text text-center mx-auto coverage-lead">
+                Atendemos proyectos en toda la provincia de Leoncio Prado, con base en Tingo María.
+            </p>
+
+            <div class="coverage-panel fade-in">
+                <div class="coverage-card">
+                    <div class="coverage-card-label">
+                        <svg class="icon-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                        PROVINCIA
+                    </div>
+                    <h3 class="coverage-card-title">LEONCIO PRADO</h3>
+                    <p class="coverage-card-sub">HUÁNUCO, PERÚ</p>
+
+                    <div class="coverage-meta">
+                        <div class="coverage-meta-row">
+                            <span class="meta-label">CAPITAL</span>
+                            <span class="meta-value">Tingo María</span>
+                        </div>
+                        <div class="coverage-meta-row">
+                            <span class="meta-label">SUPERFICIE</span>
+                            <span class="meta-value">≈ 4 917 km²</span>
+                        </div>
+                        <div class="coverage-meta-row">
+                            <span class="meta-label">DISTRITOS</span>
+                            <span class="meta-value">6</span>
+                        </div>
+                    </div>
+
+                    <a href="https://www.google.com/maps/search/?api=1&query=Provincia+Leoncio+Prado%2C+Hu%C3%A1nuco%2C+Per%C3%BA" target="_blank" class="btn-map">
+                        ABRIR EN GOOGLE MAPS
+                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+                </div>
+                <div class="coverage-map-wrap">
+                    <div id="coverage-map" role="img" aria-label="Mapa de la provincia de Leoncio Prado, Huánuco, Perú"></div>
                 </div>
             </div>
         </div>
@@ -178,7 +276,10 @@
                     </svg>
                     <span>PROYECTO NUEVO</span>
                 </div>
-                <h2 class="contact-title">¡HABLEMOS <br><span class="text-green">DE TU PROYECTO!</span></h2>
+                <h2 class="contact-title">
+                    <span class="reveal-line"><span class="reveal-line-inner">¡HABLEMOS</span></span>
+                    <span class="reveal-line"><span class="reveal-line-inner text-green">DE TU PROYECTO!</span></span>
+                </h2>
             </div>
 
             <div class="contact-content-stacked">
@@ -204,18 +305,6 @@
                         930 574 123
                     </a>
                 </div>
-
-                <div class="contact-location">
-                    <div class="location-card">
-                        <span class="wa-icon-circle">
-                            <svg class="icon-pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        </span>
-                        <div class="location-text-group">
-                            <span class="location-title">LEONCIO PRADO</span>
-                            <span class="location-sub">Atención en toda la provincia</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -224,7 +313,7 @@
         <div class="footer-top">
             <div class="container footer-grid">
                 <div class="footer-brand">
-                    <span class="footer-logo">IngGeoTop</span>
+                    <span class="footer-logo">ingGEOtop</span>
                     <p class="footer-tagline">Precisión en cada medición, seguridad en cada proyecto.</p>
                 </div>
                 <div class="footer-col">
@@ -242,11 +331,12 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; <span id="year">2026</span> IngGeoTop. Todos los derechos reservados.</p>
+              <p style="white-space: nowrap;">&copy; <span id="year">2026</span> IngGeoTop. Todos los derechos reservados <span style="margin-left: 15px;"></span>|<span style="margin-left: 15px;"></span> lucashidalgomateo7@gmail.com</p>
             </div>
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
