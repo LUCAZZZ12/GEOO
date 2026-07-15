@@ -110,4 +110,61 @@ document.addEventListener('DOMContentLoaded', () => {
     if (yearEl) {
         yearEl.textContent = new Date().getFullYear();
     }
+
+    // 6. Tarjetas "¿Por qué elegirnos?" — expandir/contraer al tocar
+    // (en escritorio el hover ya revela el detalle solo con CSS)
+    document.querySelectorAll('.why-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const isOpen = card.classList.toggle('is-open');
+            card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+    });
+
+    // 7. Mapa de cobertura — provincia de Leoncio Prado (Huánuco, Perú)
+    const mapEl = document.getElementById('coverage-map');
+    if (mapEl && typeof L !== 'undefined') {
+        const leoncioPradoGeoJSON = {"type":"Feature","properties":{"nombre":"Leoncio Prado","departamento":"Huánuco"},"geometry":{"type":"Polygon","coordinates":[[[-75.6216,-9.3967],[-75.6336,-9.4502],[-75.6687,-9.5096],[-75.6776,-9.5601],[-75.7139,-9.6125],[-75.7213,-9.6175],[-75.7384,-9.6082],[-75.7907,-9.466],[-75.7857,-9.4051],[-75.8112,-9.3913],[-75.8531,-9.4264],[-75.8924,-9.4332],[-75.9421,-9.4879],[-76.0114,-9.508],[-76.0717,-9.4718],[-76.1599,-9.4694],[-76.2034,-9.4992],[-76.204,-9.4467],[-76.2353,-9.4182],[-76.2277,-9.38],[-76.141,-9.3033],[-76.0832,-9.3045],[-76.0568,-9.2817],[-76.0987,-9.2117],[-76.214,-9.2044],[-76.2442,-9.147],[-76.2721,-9.214],[-76.3105,-9.1769],[-76.3584,-9.1972],[-76.4131,-9.1774],[-76.4802,-9.1721],[-76.4734,-9.0122],[-76.4192,-8.9864],[-76.3655,-9.0263],[-76.2405,-8.9711],[-76.2212,-8.9257],[-76.2266,-8.8638],[-76.2054,-8.8339],[-76.2236,-8.7914],[-76.1664,-8.7564],[-76.1313,-8.6568],[-76.1159,-8.6576],[-76.1304,-8.4672],[-76.1092,-8.3796],[-76.0872,-8.3369],[-75.985,-8.3222],[-75.946,-8.4009],[-75.9649,-8.4517],[-75.9663,-8.592],[-75.9798,-8.636],[-75.9458,-8.7161],[-75.9216,-8.7808],[-75.9173,-8.8792],[-75.8744,-8.9703],[-75.8759,-9.0215],[-75.8444,-9.0515],[-75.8065,-9.1215],[-75.7941,-9.1884],[-75.7318,-9.2723],[-75.6708,-9.3966],[-75.6216,-9.3967]]]}};
+
+        const coverageMap = L.map(mapEl, {
+            scrollWheelZoom: false,
+            attributionControl: true
+        });
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; OpenStreetMap &copy; CARTO',
+            subdomains: 'abcd',
+            maxZoom: 18
+        }).addTo(coverageMap);
+
+        const provinceLayer = L.geoJSON(leoncioPradoGeoJSON, {
+            style: {
+                color: '#6FA42A',
+                weight: 2.5,
+                fillColor: '#6FA42A',
+                fillOpacity: 0.22
+            }
+        }).addTo(coverageMap);
+
+        coverageMap.fitBounds(provinceLayer.getBounds(), { padding: [24, 24] });
+
+        const pinIcon = L.divIcon({
+            className: 'coverage-pin',
+            html: '<svg width="30" height="40" viewBox="0 0 30 40" xmlns="http://www.w3.org/2000/svg"><path d="M15 0C6.7 0 0 6.7 0 15c0 10.5 15 25 15 25s15-14.5 15-25C30 6.7 23.3 0 15 0z" fill="#6FA42A"/><circle cx="15" cy="15" r="6" fill="#0A1B3F"/></svg>',
+            iconSize: [30, 40],
+            iconAnchor: [15, 38],
+            popupAnchor: [0, -34]
+        });
+
+        // Tingo María, capital de la provincia
+        L.marker([-9.2939, -75.9997], { icon: pinIcon })
+            .addTo(coverageMap)
+            .bindPopup(
+                '<div class="map-popup"><span class="map-popup-label">PROVINCIA</span><h4>Leoncio Prado</h4><p>Huánuco, Perú</p></div>',
+                { closeButton: true, className: 'ingeotop-popup' }
+            )
+            .openPopup();
+
+        coverageMap.on('click', () => coverageMap.scrollWheelZoom.enable());
+        mapEl.addEventListener('mouseleave', () => coverageMap.scrollWheelZoom.disable());
+    }
 });
