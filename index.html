@@ -20,7 +20,7 @@
             </div>
             <nav>
                 <ul class="nav-links">
-                    <li><a href="#contacto" class="btn-contacto">Contacto</a></li>
+                    <li><a href="#contacto" class="btn-contacto"><span class="btn-contacto-text">Contacto</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -150,7 +150,7 @@
         </div>
 
         <div class="container why-grid fade-in">
-            <button class="why-card" type="button" aria-expanded="false">
+            <button class="why-card" type="button" aria-expanded="false" aria-controls="why-detail-1">
                 <div class="why-card-top">
                     <div class="feat-icon-badge"><span class="feat-icon">🎯</span></div>
                     <div class="why-card-heading">
@@ -159,14 +159,14 @@
                     </div>
                     <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
-                <div class="why-card-detail">
+                <div class="why-card-detail" id="why-detail-1">
                     <div class="why-card-detail-inner">
                         <p>Equipos GPS/GNSS y estación total de alta gama que garantizan tolerancias milimétricas en cada punto levantado.</p>
                     </div>
                 </div>
             </button>
 
-            <button class="why-card" type="button" aria-expanded="false">
+            <button class="why-card" type="button" aria-expanded="false" aria-controls="why-detail-2">
                 <div class="why-card-top">
                     <div class="feat-icon-badge"><span class="feat-icon">💻</span></div>
                     <div class="why-card-heading">
@@ -175,14 +175,14 @@
                     </div>
                     <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
-                <div class="why-card-detail">
+                <div class="why-card-detail" id="why-detail-2">
                     <div class="why-card-detail-inner">
                         <p>Drones para fotogrametría, receptores RTK y software de procesamiento CAD/BIM que agilizan cada etapa, del campo al plano final.</p>
                     </div>
                 </div>
             </button>
 
-            <button class="why-card" type="button" aria-expanded="false">
+            <button class="why-card" type="button" aria-expanded="false" aria-controls="why-detail-3">
                 <div class="why-card-top">
                     <div class="feat-icon-badge"><span class="feat-icon">👥</span></div>
                     <div class="why-card-heading">
@@ -191,14 +191,14 @@
                     </div>
                     <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
-                <div class="why-card-detail">
+                <div class="why-card-detail" id="why-detail-3">
                     <div class="why-card-detail-inner">
                         <p>Ingenieros geógrafos, civiles y técnicos topógrafos con experiencia de campo y respaldo colegiado.</p>
                     </div>
                 </div>
             </button>
 
-            <button class="why-card" type="button" aria-expanded="false">
+            <button class="why-card" type="button" aria-expanded="false" aria-controls="why-detail-4">
                 <div class="why-card-top">
                     <div class="feat-icon-badge"><span class="feat-icon">✔️</span></div>
                     <div class="why-card-heading">
@@ -207,7 +207,7 @@
                     </div>
                     <svg class="why-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
                 </div>
-                <div class="why-card-detail">
+                <div class="why-card-detail" id="why-detail-4">
                     <div class="why-card-detail-inner">
                         <p>Cronogramas claros, seguimiento constante y entregables con respaldo técnico y legal.</p>
                     </div>
@@ -261,6 +261,9 @@
                 </div>
                 <div class="coverage-map-wrap">
                     <div id="coverage-map" role="img" aria-label="Mapa de la provincia de Leoncio Prado, Huánuco, Perú"></div>
+                    <div class="map-touch-hint" id="mapTouchHint" aria-hidden="true">
+                        <span><span class="hint-icon">→</span>Toca para mover el mapa</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -331,8 +334,8 @@
         </div>
         <div class="footer-bottom">
             <div class="container">
-              <p style="white-space: nowrap;">&copy; <span id="year">2026</span> IngGeoTop. Todos los derechos reservados </p>
-                <p>lucashidalgomateo7@gmail.com</p>
+              <p>&copy; <span id="year">2026</span> IngGeoTop. Todos los derechos reservados</p>
+              <p><a href="mailto:lucashidalgomateo7@gmail.com">lucashidalgomateo7@gmail.com</a></p>
             </div>
         </div>
     </footer>
