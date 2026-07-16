@@ -494,8 +494,8 @@ button:focus-visible {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.why-card:hover,
-.why-card:focus-visible,
+/* Estado abierto: controlado por la clase .is-open que añade el JS al tocar/hacer click.
+   Es la ÚNICA fuente de verdad en pantallas táctiles, para que no se quede "atascado". */
 .why-card.is-open {
     transform: translateY(-6px);
     background: rgba(255, 255, 255, 0.055);
@@ -509,6 +509,23 @@ button:focus-visible {
         0 0 25px rgba(140, 198, 63, 0.2),      /* Resplandor medio expansivo */
         0 0 50px rgba(111, 164, 42, 0.15),     /* Luz difuminada lejana */
         inset 0 0 15px rgba(140, 198, 63, 0.1); /* Resplandor interno sutil */
+}
+
+/* Hover/focus de teclado: solo en dispositivos con mouse/trackpad real.
+   En táctil, ":hover" puede quedar "pegado" tras el tap y bloquear el cierre,
+   así que ahí solo manda la clase .is-open de arriba. */
+@media (hover: hover) and (pointer: fine) {
+    .why-card:hover,
+    .why-card:focus-visible {
+        transform: translateY(-6px);
+        background: rgba(255, 255, 255, 0.055);
+        border-color: var(--light-green);
+        box-shadow: 
+            0 0 10px rgba(140, 198, 63, 0.4),
+            0 0 25px rgba(140, 198, 63, 0.2),
+            0 0 50px rgba(111, 164, 42, 0.15),
+            inset 0 0 15px rgba(140, 198, 63, 0.1);
+    }
 }
 
 .why-card-top {
@@ -539,11 +556,17 @@ button:focus-visible {
     transition: transform 0.4s var(--ease), color 0.4s ease;
 }
 
-.why-card:hover .why-chevron,
-.why-card:focus-visible .why-chevron,
 .why-card.is-open .why-chevron {
     transform: rotate(180deg);
     color: var(--primary-green);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .why-card:hover .why-chevron,
+    .why-card:focus-visible .why-chevron {
+        transform: rotate(180deg);
+        color: var(--primary-green);
+    }
 }
 
 .feat-icon-badge {
@@ -559,11 +582,17 @@ button:focus-visible {
     transition: background 0.35s ease, transform 0.35s var(--ease);
 }
 
-.why-card:hover .feat-icon-badge,
-.why-card:focus-visible .feat-icon-badge,
 .why-card.is-open .feat-icon-badge {
     background: var(--gradient-green);
     transform: translateY(-3px);
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .why-card:hover .feat-icon-badge,
+    .why-card:focus-visible .feat-icon-badge {
+        background: var(--gradient-green);
+        transform: translateY(-3px);
+    }
 }
 
 .feat-icon {
@@ -590,19 +619,110 @@ button:focus-visible {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.why-card:hover .why-card-detail,
-.why-card:focus-visible .why-card-detail,
 .why-card.is-open .why-card-detail {
     grid-template-rows: 1fr;
     opacity: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .why-card:hover .why-card-detail,
+    .why-card:focus-visible .why-card-detail {
+        grid-template-rows: 1fr;
+        opacity: 1;
+    }
 }
 
 @media (max-width: 992px) {
     .why-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+/* Móvil: lista compacta en lugar de tarjetas apiladas.
+   Se elimina el padding/borde individual de cada tarjeta y se usa
+   una lista con separadores finos, para que las 4 opciones quepan
+   sin obligar a un scroll excesivo. */
 @media (max-width: 600px) {
-    .why-grid { grid-template-columns: 1fr; }
+    .why-us {
+        padding: 64px 0 90px;
+    }
+
+    .why-lead {
+        font-size: 0.95rem !important;
+    }
+
+    .why-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+        margin-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .why-card {
+        padding: 16px 4px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        transform: none;
+        opacity: 1;
+        animation: none !important;
+    }
+
+    .why-card.is-open {
+        transform: none;
+        box-shadow: none;
+        background: transparent;
+    }
+
+    /* Fondo "a sangre": se extiende de borde a borde de la pantalla aunque
+       la tarjeta viva dentro del contenedor con padding lateral. El truco es
+       centrar el pseudo-elemento en el viewport (left/right 50% + margen
+       negativo de -50vw) en vez de limitarlo al ancho de .why-card. */
+    .why-card.is-open::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        right: 50%;
+        width: 100vw;
+        margin-left: -50vw;
+        background: rgba(255, 255, 255, 0.045);
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .why-card-top,
+    .why-card-detail {
+        position: relative;
+        z-index: 1;
+    }
+
+    .why-card-top {
+        gap: 12px;
+    }
+
+    .feat-icon-badge {
+        width: 40px;
+        height: 40px;
+    }
+
+    .feat-icon {
+        font-size: 17px;
+    }
+
+    .why-card-heading h4 {
+        font-size: 0.95rem;
+    }
+
+    .why-card-heading p {
+        font-size: 0.78rem;
+    }
+
+    .why-card-detail p {
+        font-size: 0.86rem;
+        padding-top: 12px;
+        margin-top: 12px;
+    }
 }
 
 /* ============================================
@@ -726,6 +846,97 @@ button:focus-visible {
     height: 100%;
     background: var(--blue-deep);
     z-index: 0;
+}
+.btn-contacto {
+    position: relative;
+    display: inline-flex;      /* 👈 esto hace que overflow:hidden SÍ funcione */
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: transparent;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 24px;
+    border: 2px solid var(--primary-green);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    z-index: 0;
+}
+
+.btn-contacto:hover {
+    background: var(--gradient-green);
+    border-color: transparent;
+    box-shadow: var(--shadow-green);
+    transform: translateY(-1px);
+}
+
+.btn-contacto-text {
+    position: relative;
+    z-index: 2; /* el texto siempre encima del brillo */
+}
+
+.btn-contacto::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.05) 20%,
+        rgba(255, 255, 255, 0.35) 50%,   /* 👈 antes 0.5, ahora más discreto */
+        rgba(255, 255, 255, 0.05) 80%,
+        transparent 100%
+    );
+    transform: skewX(-20deg);
+    animation: shine-sweep 4.5s ease-in-out infinite;   /* 👈 antes 2.8s, ahora más espaciado */
+    pointer-events: none;
+    z-index: 1;
+    will-change: transform;
+}
+@keyframes shine-sweep {
+    0% { left: -75%; }
+    40%, 100% { left: 130%; }
+}
+
+
+/* Aviso "toca para mover el mapa": solo se muestra (vía JS) en pantallas táctiles,
+   para que un dedo pasando de largo pueda seguir haciendo scroll de la página
+   en vez de arrastrar el mapa por accidente. Un toque lo activa y desaparece. */
+.map-touch-hint {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 16, 36, 0.28);
+    cursor: pointer;
+}
+
+.map-touch-hint span {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(10, 27, 63, 0.92);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: var(--shadow-md);
+}
+
+.hint-icon {
+    font-size: 1rem;
 }
 
 /* Overrides de Leaflet para que combine con la identidad de la marca */
@@ -984,6 +1195,24 @@ footer::before {
     position: relative;
 }
 
+.footer-bottom .container p {
+    margin-bottom: 4px;
+}
+
+.footer-bottom .container p:last-child {
+    margin-bottom: 0;
+}
+
+.footer-bottom a {
+    color: #6A7C92;
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+.footer-bottom a:hover {
+    color: var(--light-green);
+}
+
 /* ============================================
    ANIMACIONES DE REVELADO
    ============================================ */
@@ -1113,10 +1342,20 @@ footer::before {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.why-card:hover .why-card-detail,
-.why-card:focus-visible .why-card-detail,
 .why-card.is-open .why-card-detail {
     grid-template-rows: 1fr;
     opacity: 1;
 }
+}
+
+/* Mantiene la lista compacta en móvil incluso con movimiento reducido activado */
+@media (max-width: 600px) and (prefers-reduced-motion: reduce) {
+    .why-card {
+        min-height: auto;
+        padding: 16px 4px;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+    }
 }
